@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maxium-scale=1, user-scalable=no">
+    <title>ArcGIS</title>
+    <style>
+        html, body, #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+        </style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.11/"></script>
+  
+  <script>
+      require([
+          "esri/Map",
+          "esri/views/MapView",
+         /* "esri/widgets/BasemapToggle",
+          "esri/widgets/BasemapGallery",*/
+          "esri/layers/FeatureLayer"
+        ], function(Map, MapView, /*BasemapToggle, BasemapGallery,*/ FeatureLayer) {
+
+        var map = new Map({
+          basemap: "streets-navigation-vector"
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-80.2706, 26.2712],
+          zoom: 14
+            /***ADD***/
+          /*camera: {
+              tilt: 65,
+              position: {
+                  x: -80.27,
+                  y: 26.27,
+                  z: 35000 //meters
+              }
+          }  */  
+        });
+        
+        /*var basemapToggle = new BasemapToggle({
+            view: view,
+            nextBasemap: "satellite"
+        });  
+        view.ui.add(basemapToggle,"bottom-right");*/
+          
+        /*var basemapGallery = new BasemapGallery({
+            view: view,
+            source: {
+                portal: {
+                    url: "http://www.arcgis.com",
+                    useVectorBasemaps: true // Load vector tile basemaps
+                }
+            }
+        });
+        view.ui.add(basemapGallery, "top-right");*/
+          
+        //Trailheads point feature layer
+        var featureLayer = new FeatureLayer({
+            url: "https://joelchester2012.maps.arcgis.com/home/webmap/viewer.html?webmap=3c83742c44304d02b1449569c569f78a"
+        });
+        map.add(featureLayer); 
+          
+      });
+    </script>    
+    
+</head>
+<body>
+    <div id="viewDiv"></div>
+</body>
+</html>
